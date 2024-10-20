@@ -17,60 +17,39 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HonePage(),
+      home: const GridViewBuilder(),
     );
   }
 }
 
-class HonePage extends StatelessWidget {
-  const HonePage({super.key});
+class GridViewBuilder extends StatelessWidget {
+  const GridViewBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("List View"),
+        title: Text("Grid View"),
       ),
-      body: ListView.separated(
-          separatorBuilder: (context, seprator) {
-            return Container(
-              height: 20,
-              width: double.infinity,
-              color: Colors.grey,
-            );
-          },
-          itemCount: 200,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              title: Text("UserName"),
-              subtitle: Text("Dome description"),
-              trailing: Icon(Icons.delete),
-            );
-          }
-          // children: [
-          //   ListTile(
-          //     leading: Container(
-          //       width: 50,
-          //       height: 50,
-          //       decoration: BoxDecoration(
-          //         color: Colors.grey,
-          //         shape: BoxShape.circle,
-          //       ),
-          //     ),
-          //     title: Text("UserName"),
-          //     subtitle: Text("Dome description"),
-          //     trailing: Icon(Icons.delete),
-          //   ),
-          // ],
-          ),
+      body: GridView.builder(
+        itemCount: 20,
+        padding: EdgeInsets.all(10),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+        ),
+        itemBuilder: (context, index) {
+          return Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.lightGreen,
+            ),
+          );
+        },
+      ),
     );
   }
 }
