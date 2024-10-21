@@ -1,5 +1,6 @@
 import 'package:bootcamp_week1/GridViewBuilder.dart';
 import 'package:bootcamp_week1/LoginPage.dart';
+import 'package:bootcamp_week1/PageViewScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,68 +24,57 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class PageViewScreen extends StatefulWidget {
-  const PageViewScreen({super.key});
+class HomePageState extends StatefulWidget {
+  const HomePageState({super.key});
 
   @override
-  State<PageViewScreen> createState() => _PageViewScreenState();
+  State<HomePageState> createState() => _HomePageStateState();
 }
 
-class _PageViewScreenState extends State<PageViewScreen> {
-  PageController _pagecontroller = PageController(initialPage: 1);
+class _HomePageStateState extends State<HomePageState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Page View",
+      body: Center(),
+    );
+  }
+}
+
+class OnBoardingItem extends StatelessWidget {
+  final String title;
+  final String description;
+  final String image;
+  final int index;
+
+  const OnBoardingItem({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.image,
+    required this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Image.asset("assets/$image"),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              _pagecontroller.animateToPage(0,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.bounceIn);
-            },
-            icon: const Icon(Icons.arrow_back_ios),
-          ),
-          IconButton(
-            onPressed: () {
-              _pagecontroller.animateToPage(1,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.bounceIn);
-            },
-            icon: const Icon(Icons.arrow_forward_ios),
-          ),
-        ],
-      ),
-      body: PageView(
-        controller: _pagecontroller,
-        onPageChanged: (value) {
-          print(value);
-        },
-        scrollDirection: Axis.vertical,
-        children: [
-          Container(
-            color: Colors.red,
-            child: Center(
-              child: Text("Page 1"),
-            ),
-          ),
-          Container(
-            color: Colors.blue,
-            child: Center(
-              child: Text("Page 2"),
-            ),
-          ),
-          Container(
-            color: Colors.yellow,
-            child: Center(
-              child: Text("Page 3"),
-            ),
-          ),
-        ],
-      ),
+        SizedBox(height: 20),
+        Text(
+          title,
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 20),
+        Text(
+          description,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 18, color: Colors.grey),
+        ),
+        SizedBox(height: 50),
+      ],
     );
   }
 }
